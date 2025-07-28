@@ -1,0 +1,24 @@
+pdfminer.six
+scikit-learn
+numpy
+pandas
+nltk
+beautifulsoup4
+lxml
+joblib
+scipy
+PyMuPDF
+
+# For Round 1B components
+sentence-transformers
+faiss-cpu
+torch
+pathlib
+argparse
+logging
+json
+time
+re
+dataclasses
+typing
+collections
