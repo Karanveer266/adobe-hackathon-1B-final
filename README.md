@@ -93,4 +93,34 @@ The system extends the Part 1A pipeline with a sophisticated analysis layer. It 
 - *Document Structure Awareness*: Leverages Part 1A's heading detection for better organization
 
 *Note*: This system requires the PDF Heading Detection System (Part 1A) to be properly installed and configured as a foundation component.
+
+## Running Instructions
+
+### Using Docker
+
+1. Build the Docker image:
+   ```bash
+   docker build -t adobe-hackathon-1b -f dockerfile .
+   ```
+2. Run the following commands for the respective collection folder you want to run
+```bash
+# For Collection 1
+docker run -v "$(pwd)/input/Collection 1:/app/input" -v "$(pwd)/output:/app/output" adobe-hackathon-1b
+
+# For Collection 2
+docker run -v "$(pwd)/input/Collection 2:/app/input" -v "$(pwd)/output:/app/output" adobe-hackathon-1b
+
+# For Collection 3
+docker run -v "$(pwd)/input/Collection 3:/app/input" -v "$(pwd)/output:/app/output" adobe-hackathon-1b
+```
+The output will be generated in the output folder.
+
+### Without docker
+
+```bash
+pip install -r requirements.txt
+```
+
+```bash
+python main_1b.py --input-dir "input/Collection 1" --output-dir "output"
 ```
