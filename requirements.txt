@@ -13,12 +13,3 @@ PyMuPDF
 sentence-transformers
 faiss-cpu
 torch
-pathlib
-argparse
-logging
-json
-time
-re
-dataclasses
-typing
-collections

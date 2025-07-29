@@ -30,18 +30,10 @@ ENV HF_HUB_DISABLE_PROGRESS_BARS=1
 ENV HF_HUB_DISABLE_SYMLINKS_WARNING=1
 ENV SENTENCE_TRANSFORMERS_HOME=/app/models
 
-# Download the embedding model (all-mpnet-base-v2) during build time
-RUN python -c "\
-import os; \
-os.environ['SENTENCE_TRANSFORMERS_HOME'] = '/app/models'; \
-from sentence_transformers import SentenceTransformer; \
-print('Downloading all-mpnet-base-v2 model...'); \
-model = SentenceTransformer('all-mpnet-base-v2', cache_folder='/app/models'); \
-print('Model downloaded successfully'); \
-print(f'Model dimension: {model.get_sentence_embedding_dimension()}'); \
-"
+# Copy the pre-downloaded model from local models folder
+COPY models/ /app/models/
 
-# Copy all source files
+# Copy all source files  
 COPY main_1b.py .
 COPY persona_document_analyzer.py .
 COPY embedding_engine.py .
@@ -60,15 +52,8 @@ COPY *.py .
 # Set proper permissions
 RUN chmod +x main_1b.py
 
-# Verify model is accessible and working
-RUN python -c "\
-from embedding_engine import EmbeddingEngine; \
-print('Testing embedding engine...'); \
-engine = EmbeddingEngine(); \
-test_embedding = engine.encode_text('test'); \
-print(f'Test embedding shape: {test_embedding.shape}'); \
-print('Embedding engine working correctly'); \
-"
+# Optional: Verify the model files are copied correctly
+RUN ls -la /app/models/models--sentence-transformers--all-mpnet-base-v2/snapshots/
 
 # Set the entry point
 ENTRYPOINT ["python", "main_1b.py", "--input-dir", "/app/input", "--output-dir", "/app/output"]
