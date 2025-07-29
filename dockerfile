@@ -1,4 +1,3 @@
-# Use AMD64 platform explicitly as required
 FROM --platform=linux/amd64 python:3.9-slim
 
 # Set working directory
@@ -42,7 +41,6 @@ COPY section_ranker.py .
 COPY subsection_analyzer.py .
 COPY config_1b.py .
 
-# Copy Part 1A dependencies (assuming they exist)
 COPY main.py .
 COPY pdf_processor.py .
 
@@ -51,9 +49,6 @@ COPY *.py .
 
 # Set proper permissions
 RUN chmod +x main_1b.py
-
-# Optional: Verify the model files are copied correctly
-RUN ls -la /app/models/models--sentence-transformers--all-mpnet-base-v2/snapshots/
 
 # Set the entry point
 ENTRYPOINT ["python", "main_1b.py", "--input-dir", "/app/input", "--output-dir", "/app/output"]
