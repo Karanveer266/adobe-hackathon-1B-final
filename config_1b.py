@@ -6,9 +6,9 @@ Updated for all-mpnet-base-v2 model
 from pathlib import Path
 
 class Config1B:
-    # Model settings - UPGRADED TO MPNET
-    EMBEDDING_MODEL_NAME = "all-mpnet-base-v2"  # ~420MB, better semantic understanding
-    EMBEDDING_DIMENSION = 768  # Updated from 384 to 768
+    # Model settings - CORRECTED TO all-MiniLM-L6-v2
+    EMBEDDING_MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"  # Corrected model name
+    EMBEDDING_DIMENSION = 384  # Corrected from 768 to 384
     MAX_MODEL_SIZE_MB = 1024  # 1GB limit
     
     # Text processing limits
